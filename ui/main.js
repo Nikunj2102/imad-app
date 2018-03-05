@@ -22,7 +22,7 @@ button.onclick=function(){
       };
       
       //make a request
-      request.open("GET", "nikunjdhingra21.imad.hasura-app.io/counter", true);
+      request.open('GET', "http://nikunjdhingra21.imad.hasura-app.io/counter", true);
       request.send(null);
      
 };
