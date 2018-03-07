@@ -12,10 +12,17 @@ button.onclick=function(){
           
           // we take some action
           if(request.status===200)
-          {
-              var counter = request.responseText;
-              var span=document.getElementById("count");
-              span.innerHTML=counter.toString();
+          {     
+                //capture a list of names and renderthem as a name
+               var names=['name1','name2','name3'];
+    var list="";
+    for(var i=0;i<names.length;i++)
+    {
+        list += "<li>" + names[i] + "</li>";
+    }
+    
+    var ul=document.getElementById("namelist");
+    ul.innerHTML=list;
           }
         }
           
@@ -28,14 +35,25 @@ button.onclick=function(){
 };
 
 //submit name
-var nameInput=document.getElementById("name");
-var name = nameInput.value;
+
 var submit=document.getElementById("submit_btn");
 submit.onclick = function(){
   //make a request to the server and send the name
-  //capture a list of names and renderthem as a name
+ 
+    //create a request to the counter end point
     
-    var names=['name1','name2','name3'];
+    var request=new XMLHttpRequest();
+    
+    //capture the response ans store it in a variable
+    request.onreadystatechange = function(){
+      if(request.readyState === XMLHttpRequest.DONE){
+          
+          // we take some action
+          if(request.status===200)
+          {     
+                //capture a list of names and renderthem as a name
+               var names=request.responseText;
+               names=JSON.parse(names);
     var list="";
     for(var i=0;i<names.length;i++)
     {
@@ -44,4 +62,15 @@ submit.onclick = function(){
     
     var ul=document.getElementById("namelist");
     ul.innerHTML=list;
+          }
+        }
+          
+      };
+      var nameInput=document.getElementById("name");
+      var name = nameInput.value;
+      //make a request
+      request.open('GET', "http://nikunjdhingra21.imad.hasura-app.io/submit-name?name=" +name , true);
+      request.send(null);
+     
+ 
 };
