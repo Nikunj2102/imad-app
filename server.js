@@ -86,6 +86,16 @@ app.get('/counter', function(req,res){
    res.send(counter.toString());
     
 });
+var names=[];
+
+app.get('/submit-name', function(req,res){
+  
+  var name=req.query.name;   // url:// submit-name?name=xxxxx;
+  names.push(name);
+  res.send(JSON.stringify(names));
+    
+});
+
 
 app.get('/:articleName',function(req ,res){
     // articleName == article-one
@@ -106,15 +116,6 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-var names=[];
-
-app.get('/submit-name', function(req,res){
-  
-  var name=req.query.name;   // url:// submit-name?name=xxxxx;
-  names.push(name);
-  res.send(JSON.stringify(names));
-    
-});
 
 
 
