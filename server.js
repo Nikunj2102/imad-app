@@ -15,40 +15,6 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles ={
-    'article-one': {
-  
-  title: "Article-one | Nikunnj Dhingra",
-  heading: "Article-one",
-  date: "march 5,2018",
-  content: `<p>
-                    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.
-            </p>
-            <p>
-                    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.
-            </p>
-            <p>
-                    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.    this is the content for article-one.
-            </p>`
-} ,
-    'article-two': {
-         title: "Article-two | Nikunnj Dhingra",
-  heading: "Article-two",
-  date: "march 5,2018",
-  content: `<p>
-                    this is the content for article-two
-            </p>`        
-    },
-     'article-three': {
-          title: "Article-three | Nikunnj Dhingra",
-  heading: "Article-three",
-  date: "march 5,2018",
-  content: `<p>
-                    this is the content for article-three
-            </p>`    
-     }
-
-};
 function createTemplate(data)
 {
   var title=data.title;
@@ -130,7 +96,7 @@ app.get('/articles/:articleName',function(req ,res){
     // articleName == article-one
 // articles[articleName] == {} object for article one
 
-pool.query("SELECT * FROM article WHERE title= '" + req.params.articleName + "'" , function(err,result){
+pool.query("SELECT * FROM article WHERE title= $1",[req.params.articleName], function(err,result){
     if(err)
     {
         res.status(500).send(err.toString());
