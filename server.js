@@ -67,7 +67,7 @@ return hashed.toString("hex");
     
 }
 
-app.get("/hasg/:input", function(req,res)
+app.get("/hash/:input", function(req,res)
 {
  
  var hashedString = hash(req.params.input,'this-is-some-random-string'); 
